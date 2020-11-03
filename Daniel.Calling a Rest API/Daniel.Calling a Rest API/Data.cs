@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace Daniel.Calling_a_Rest_API
 {
-    class Data
+    public class Data
     {
+        public string id { get; set; }
+
+        public string name { get; set; }
+
+        public string year { get; set; }
+
+        public string color { get; set; }
+
+        public string pantone_value { get; set; }
     }
 }

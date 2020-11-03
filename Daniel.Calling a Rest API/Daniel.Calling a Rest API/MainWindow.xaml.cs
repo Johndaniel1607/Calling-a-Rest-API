@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,29 @@ namespace Daniel.Calling_a_Rest_API
         public MainWindow()
         {
             InitializeComponent();
+            ShowData();
+        }
+        private void ShowData()
+        {
+            var Client = new RestClient("https://reqres.in/api/products/2");
+
+            var request = new RestRequest("", Method.GET);
+
+            IRestResponse response = Client.Execute(request);
+
+            var content = response.Content;
+
+            var data = JsonConvert.DeserializeObject<Data>(content);
+            lblid.Content = "id:" + data.id;
+            lblname.Content = "name:" + data.name;
+            lblyear.Content = "year:" + data.year;
+            lblcolor.Content = "color:" + data.color;
+            lblpantone_value.Content = "pantone_value:" + data.pantone_value;
+        }
+
+        private void btnProduct_Click(object sender, RoutedEventArgs e)
+        {
+            ShowData();
         }
     }
 }
